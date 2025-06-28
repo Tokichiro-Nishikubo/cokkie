@@ -9,6 +9,7 @@ public class FactoryUi : MonoBehaviour
     AddFactoryBase factoryBase;
     public enum ButtonType
     {
+        Amplification,
         Point,
         Amount,
         Speed
@@ -26,6 +27,9 @@ public class FactoryUi : MonoBehaviour
         {
             switch (buttonType)
             {
+                case ButtonType.Amplification:
+                    buttonName.text = "”{—¦";
+                    break;
                 case ButtonType.Point:
                     buttonName.text = "ƒ|ƒCƒ“ƒg";
                     break;
@@ -41,6 +45,9 @@ public class FactoryUi : MonoBehaviour
         {
             switch (buttonType)
             {
+                case ButtonType.Amplification:
+                    buttonCost.text = factoryBase.GetTotalAmplificationCost().ToReadableString();
+                    break;
                 case ButtonType.Point:
                     buttonCost.text = factoryBase.GetPointCost().ToReadableString();
                     break;
@@ -56,6 +63,9 @@ public class FactoryUi : MonoBehaviour
         {
             switch (buttonType)
             {
+                case ButtonType.Amplification:
+                    buttonLevel.text = factoryBase.TotalAmplificationNum.ToString();
+                    break;
                 case ButtonType.Point:
                     buttonLevel.text = factoryBase.PointNum.ToString();
                     break;
@@ -76,6 +86,9 @@ public class FactoryUi : MonoBehaviour
         {
             switch (buttonType)
             {
+                case ButtonType.Amplification:
+                    buttonCost.text = factoryBase.GetTotalAmplificationCost().ToReadableString();
+                    break;
                 case ButtonType.Point:
                     buttonCost.text = factoryBase.GetPointCost().ToReadableString();
                     break;
@@ -100,6 +113,9 @@ public class FactoryUi : MonoBehaviour
         {
             switch (buttonType)
             {
+                case ButtonType.Amplification:
+                    buttonLevel.text = factoryBase.TotalAmplificationNum.ToString();
+                    break;
                 case ButtonType.Point:
                     buttonLevel.text = factoryBase.PointNum.ToString();
                     break;
@@ -125,6 +141,12 @@ public class FactoryUi : MonoBehaviour
         Debug.Log($"OnClickButton: {mousePos}");
         switch (buttonType)
         {
+            case ButtonType.Amplification:
+                if (factoryBase.IsTotalAmplificationBuy())
+                {
+                    factoryBase.TotalAmplificationBuy();
+                }
+                break;
             case ButtonType.Point:
                 if (factoryBase.IsPointBuy())
                 {
