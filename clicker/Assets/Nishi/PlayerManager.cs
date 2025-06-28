@@ -6,6 +6,11 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     public double Money { get; private set; } = 0;
 
 
+    private void Start()
+    {
+        
+    }
+
     public void UseMoney(double money)
     {
         Money -= money;
@@ -17,4 +22,8 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         Money += add;
     }
 
+    public void ForceSetMoney(double set)
+    {
+        Money = set;
+    }
 }

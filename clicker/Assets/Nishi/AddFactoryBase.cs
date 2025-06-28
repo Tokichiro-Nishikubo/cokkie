@@ -88,4 +88,20 @@ public class AddFactoryBase
     {
         return PlayerManager.Instance.Money < GetSpeedCost();
     }
+
+    public void ForceSetPointNum(int num)
+    {
+        PointNum = num;
+    }
+
+    public void ForceSetAmountNum(int num)
+    {
+        AmountNum = num;
+    }
+
+    public void ForceSetSpeedNum(int num)
+    {
+        SecSpeedNum = num;
+        SecSpeed = 1 - SecSpeedNum;
+    }
 }
