@@ -17,6 +17,7 @@ public class FactoryUi : MonoBehaviour
     public TextMeshProUGUI buttonName;
     public TextMeshProUGUI buttonCost;
     public TextMeshProUGUI buttonLevel;
+    public ParticleSystem buttonParticle;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -116,6 +117,11 @@ public class FactoryUi : MonoBehaviour
     public void OnClickButton()
     {
         var mousePos = Input.mousePosition;
+        if (buttonParticle != null)
+        {
+            buttonParticle.Play();
+        }
+
         Debug.Log($"OnClickButton: {mousePos}");
         switch (buttonType)
         {
