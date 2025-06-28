@@ -13,6 +13,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     [SerializeField] private GameObject _reachText;
 
+    [SerializeField] public CircleManager _circleManager;
+
     private double addLev = 1;
 
     private string _socreKey = "Score";
@@ -20,6 +22,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private string _facAmountKey = "FAmount";
     private string _facSpeedKey = "FSpeed";
     private string _facAll = "FALL";
+
+    int _prevAmount = 0;
 
     private void Start()
     {
@@ -39,6 +43,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         PlayerManager.Instance.AddMoney(add);
 
         Debug.Log("add: " + perSecAdd);
+
+        if (_factory.PointNum > _circleManager.GetCircleCount())
+        {
+            _circleManager.AddCircle();
+        }
+
+        if(_factory.AmountNum != _prevAmount)
+        {
+            _circleManager.ChangeColor(_factory.AmountNum);
+            _prevAmount = _factory.AmountNum;
+        }
 
         Save();
     }

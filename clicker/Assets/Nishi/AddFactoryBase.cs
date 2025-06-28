@@ -60,6 +60,7 @@ public class AddFactoryBase
         if (PlayerManager.Instance.Money < cost) return false;
 
         PointNum++;
+
         return true;
     }
 
@@ -69,6 +70,7 @@ public class AddFactoryBase
         if (PlayerManager.Instance.Money < cost) return false;
 
         AmountNum++;
+
         return true;
     }
 

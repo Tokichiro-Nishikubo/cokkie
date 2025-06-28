@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CircleManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3794313478789807399, guid: 2cd90860341eb864d831493bd41e54d1, type: 3}
+      propertyPath: colorManager
+      value: 
+      objectReference: {fileID: 217295217}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -590,6 +594,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372764114}
   m_CullTransparentMesh: 1
+--- !u!114 &391467857 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3794313478789807399, guid: 2cd90860341eb864d831493bd41e54d1, type: 3}
+  m_PrefabInstance: {fileID: 336363093}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5031e9b9e306f2541b5a768138252616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &489218051
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +637,7 @@ MonoBehaviour:
   _text: {fileID: 1523517291}
   _store: {fileID: 1608416285}
   _reachText: {fileID: 0}
+  _circleManager: {fileID: 391467857}
 --- !u!4 &489218053
 Transform:
   m_ObjectHideFlags: 0

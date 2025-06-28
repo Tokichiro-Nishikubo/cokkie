@@ -9,7 +9,7 @@ public class CircleManager : MonoBehaviour
     [SerializeField] Vector3 position;
     [SerializeField] GameObject prefab;
     [SerializeField] List<Color> colorList = new List<Color>();
-    List<GameObject> objects = new List<GameObject>(15);
+    List<GameObject> objects = new List<GameObject>();
     int num = 0;
     float speed = 1.0f;
     Color color = Color.white;
@@ -23,6 +23,8 @@ public class CircleManager : MonoBehaviour
         AddCircle();
         cm = colorManager.GetComponent<ColorManager>();
     }
+
+    public int GetCircleCount() { return objects.Count; }
 
     // Update is called once per frame
     void Update()
@@ -82,37 +84,37 @@ public class CircleManager : MonoBehaviour
         switch (num  % 11)
         {
             case 0:
-                color = cm.LevelsColor[0];
+                color = colorList[0];
                 break;
             case 1:
-                color = cm.LevelsColor[1];
+                color = colorList[1];
                 break;
             case 2:
-                color = cm.LevelsColor[2];
+                color = colorList[2];
                 break;
             case 3:
-                color = cm.LevelsColor[3];
+                color = colorList[3];
                 break;
             case 4:
-                color = cm.LevelsColor[4];
+                color = colorList[4];
                 break;
             case 5:
-                color = cm.LevelsColor[5];
+                color = colorList[5];
                 break;
             case 6:
-                color = cm.LevelsColor[6];
+                color = colorList[6];
                 break;
             case 7:
-                color = cm.LevelsColor[7];
+                color = colorList[7];
                 break;
             case 8:
-                color = cm.LevelsColor[8];
+                color = colorList[8];
                 break;
             case 9:
-                color = cm.LevelsColor[9];
+                color = colorList[9];
                 break;
             case 10:
-                color = cm.LevelsColor[10];
+                color = colorList[10];
                 break;
         }
 
