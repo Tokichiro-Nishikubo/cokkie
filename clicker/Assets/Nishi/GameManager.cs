@@ -29,4 +29,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         if (Input.GetKeyDown(KeyCode.B)) _factorys[0].Buy(1);
     }
+
+    public List<AddFactoryBase> GetFactorys() { return _factorys; }
 }
