@@ -82,8 +82,17 @@ public class FactoryUi : MonoBehaviour
                     buttonCost.text = factoryBase.GetAmountCost().ToReadableString();
                     break;
                 case ButtonType.Speed:
-                    buttonCost.text = factoryBase.GetSpeedCost().ToReadableString();
-                    break;
+                    int level = factoryBase.SecSpeedNum;
+                    if (level >= 9)
+                    {
+                        // ë¨ìxÇÃç≈ëÂÉåÉxÉãÇÕ9
+                        buttonCost.text = "MAX";
+                    }
+                    else
+                    {
+                        buttonCost.text = factoryBase.GetSpeedCost().ToReadableString();
+                    }
+                        break;
             }
         }
         if (buttonLevel != null)
@@ -97,12 +106,11 @@ public class FactoryUi : MonoBehaviour
                     buttonLevel.text = factoryBase.AmountNum.ToString();
                     break;
                 case ButtonType.Speed:
+
                     buttonLevel.text = factoryBase.SecSpeedNum.ToString();
                     break;
             }
         }
-        var mousePos = Input.mousePosition;
-        Debug.Log($"OnClickButton: {mousePos}");
     }
 
     public void OnClickButton()

@@ -12,6 +12,8 @@ public class AddFactoryBase
     public double SecSpeed { get; protected set; } = 1;
     public int SecSpeedNum { get; protected set; } = 0;
 
+    public int TotalAmplificationNum { get; protected set; } = 0;
+
     // ÉxÅ[ÉXâ¡éZó 
     private double _baseAdd = 1;
 
@@ -19,11 +21,13 @@ public class AddFactoryBase
     private double _mulPoint= 100;
     private double _mulAmount = 10;
     private double _mulSecSpeed = 5;
+    private double _mulTotalAmplification = 1.5;
 
     // äÓëbíl
     protected double _basePointCost = 8;
     protected double _baseAmountCost = 4;
     protected double _baseSpeedCost = 3;
+    protected double _baseTotalAmplificationCost = 10;
 
     public virtual double GetAddBaseMoneyPerSec()
     {
@@ -44,8 +48,12 @@ public class AddFactoryBase
     {
         return _baseSpeedCost * Math.Pow(_mulSecSpeed, SecSpeedNum);
     }
+    public double GetTotalAmplificationCost()
+    {
+        return _baseTotalAmplificationCost * Math.Pow(_mulTotalAmplification, TotalAmplificationNum);
+    }
 
-    
+
     public bool PointBuy()
     {
         double cost = GetPointCost();
@@ -73,6 +81,14 @@ public class AddFactoryBase
         SecSpeed = 1 - SecSpeedNum;
         return true;
     }
+    public bool TotalAmplificationBuy()
+    {
+        double cost = GetTotalAmplificationCost();
+        if (PlayerManager.Instance.Money < cost) return false;
+
+        TotalAmplificationNum++;
+        return true;
+    }
 
     public bool IsPointBuy()
     {
@@ -89,6 +105,10 @@ public class AddFactoryBase
         return PlayerManager.Instance.Money < GetSpeedCost();
     }
 
+    public bool IsTotalAmplificationBuy()
+    {
+        return PlayerManager.Instance.Money < GetTotalAmplificationCost();
+    }
     public void ForceSetPointNum(int num)
     {
         PointNum = num;
@@ -103,5 +123,9 @@ public class AddFactoryBase
     {
         SecSpeedNum = num;
         SecSpeed = 1 - SecSpeedNum;
+    }
+    public void ForceSetTotalAmplificationNum(int num)
+    {
+        TotalAmplificationNum = num;
     }
 }
