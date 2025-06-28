@@ -31,7 +31,6 @@ public class InfinitMouseRotate : MonoBehaviour
         public Vector2 xMaxYMax;
     }
 
-    private List<Vector2> _cursorPosHistory = new List<Vector2>();
     private List<LineSeg> _straightLineHistory = new List<LineSeg>();
     private StoragePoints _Points = new StoragePoints();      // 必要なポイントの情報を格納
     private int _curHistoryCnt = 0;                 // マウスの保存フレーム / 前のフレームを取得しやすくする為に、TimeではなくCountで行う
@@ -55,7 +54,7 @@ public class InfinitMouseRotate : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             _curHistoryCnt = 0;
-            _cursorPosHistory.Clear();
+            _straightLineHistory.Clear();
             _prevCursorPos = Vector2.zero;
             _curCursorPos = Vector2.zero;
         }
@@ -66,11 +65,10 @@ public class InfinitMouseRotate : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             _curCursorPos = Input.mousePosition;
-            _cursorPosHistory.Add(_curCursorPos);
 
-            if (_cursorPosHistory.Count > _deleteHistoryFrame)
+            if (_straightLineHistory.Count > _deleteHistoryFrame)
             {
-                _cursorPosHistory.RemoveAt(0);
+                _straightLineHistory.RemoveAt(0);
             }
 
             if (_curHistoryCnt >= 1)
@@ -104,14 +102,24 @@ public class InfinitMouseRotate : MonoBehaviour
     // 線と線の当たり判定
     public bool IsLineSegmentIntersect(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2)
     {
-        float Cross(Vector2 a, Vector2 b) => a.x * b.y - a.y * b.x;
-        float d1 = Cross(p2 - p1, q1 - p1);
-        float d2 = Cross(p2 - p1, q2 - p1);
-        float d3 = Cross(q2 - q1, p1 - q1);
-        float d4 = Cross(q2 - q1, p2 - q1);
+        // ベクトル
+        Vector2 r = p2 - p1;
+        Vector2 s = q2 - q1;
 
-        // 交差のみ許可：符号が完全に反対 (<0) でなければ false
-        return (d1 * d2 < 0) && (d3 * d4 < 0);
+        float rxs = r.x * s.y - r.y * s.x;       // r × s
+        if (Mathf.Approximately(rxs, 0f)) return false;   // 平行 or 同一直線 → 交点なし
+
+        Vector2 qp = q1 - p1;
+        float t = (qp.x * s.y - qp.y * s.x) / rxs;
+        float u = (qp.x * r.y - qp.y * r.x) / rxs;
+
+        // 端点を除き 0 と 1 は含めない（純粋交差）
+        const float Eps = 1e-6f;
+        if (t <= Eps || t >= 1f - Eps) return false;
+        if (u <= Eps || u >= 1f - Eps) return false;
+
+        _Points.crossLine = p1 + t * r;   // 交点
+        return true;
     }
 
     private bool CheckAllIntersections()
@@ -129,7 +137,7 @@ public class InfinitMouseRotate : MonoBehaviour
                 {
                     // ヒット時の処理
                     Debug.Log($"Hit! #{l1.storageCount} と #{l2.storageCount}");
-                    _Points.crossLine = 
+                    Debug.Log("交点：" + _Points.crossLine);
                     return true;
                 }
             }
