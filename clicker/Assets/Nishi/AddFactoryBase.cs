@@ -1,47 +1,91 @@
+using System;
 using UnityEngine;
 
 public class AddFactoryBase
 {
     public string Name { get; protected set; }
 
-    public int Level { get; protected set; }
+    public int PointNum { get; protected set; } = 0;
 
-    protected double _baseCost = 0;
+    public int AmountNum { get; protected set; } = 0;
 
-    protected double _baseAddMoneyPerSec = 0;
+    public double SecSpeed { get; protected set; } = 0;
+    public int SecSpeedNum { get; protected set; } = 0;
+
+    // ÉxÅ[ÉXâ¡éZó 
+    private double _baseAdd = 1;
+
+    // î{ó¶
+    private double _mulPoint= 100;
+    private double _mulAmount = 10;
+    private double _mulSecSpeed = 5;
+
+    // äÓëbíl
+    protected double _basePointCost = 8;
+    protected double _baseAmountCost = 4;
+    protected double _baseSpeedCost = 3;
 
     public virtual double GetAddBaseMoneyPerSec()
     {
-        return 1;
+        return PointNum * AmountNum * _baseAdd / SecSpeed;
     }
 
-    public virtual double GetBuyCostGroup(int buyNum)
+    public double GetPointCost()
     {
-        double sum = 0;
-        for (int i = 0; i < buyNum; i++) sum += GetBuyCost(Level + buyNum);
-
-        return sum;
+        return _basePointCost * Math.Pow(_mulPoint, PointNum);
     }
 
-    public virtual double GetBuyCost(int buyLevel)
+    public double GetAmountCost()
     {
-        return 0;
+        return _baseAmountCost * Math.Pow(_mulAmount, AmountNum);
     }
 
-    public bool Buy(int buyNum = 1)
+    public double GetSpeedCost()
     {
-        double cost = GetBuyCostGroup(buyNum);
+        return _baseSpeedCost * Math.Pow(_mulSecSpeed, SecSpeedNum);
+    }
+
+    
+    public bool PointBuy()
+    {
+        double cost = GetPointCost();
         if (PlayerManager.Instance.Money < cost) return false;
 
-        PlayerManager.Instance.UseMoney(cost);
-        Level += buyNum;
+        PointNum++;
         return true;
     }
 
-    public bool IsBuy(int buyNum = 1)
+    public bool AmountBuy()
     {
-        double cost = GetBuyCostGroup(buyNum);
+        double cost = GetAmountCost();
+        if (PlayerManager.Instance.Money < cost) return false;
 
-        return PlayerManager.Instance.Money >= cost;
+        AmountNum++;
+        return true;
+    }
+
+    public bool SpeedBuy()
+    {
+        double cost = GetSpeedCost();
+        if (PlayerManager.Instance.Money < cost) return false;
+
+        SecSpeedNum++;
+        SecSpeed = 1 - SecSpeedNum;
+        return true;
+    }
+
+    public bool IsPointBuy()
+    {
+        return PlayerManager.Instance.Money < GetPointCost();
+    }
+
+    public bool IsAmountBuy()
+    {
+        return PlayerManager.Instance.Money < GetAmountCost();
+    }
+
+    public bool IsSpeedBuy()
+    {
+        return PlayerManager.Instance.Money < GetSpeedCost();
     }
 }
