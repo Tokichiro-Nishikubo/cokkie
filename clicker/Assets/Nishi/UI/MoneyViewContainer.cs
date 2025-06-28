@@ -1,3 +1,4 @@
+using naichilab.Scripts.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,6 @@ public class MoneyViewContainer : MonoBehaviour
 
     private void Update()
     {
-        _text.text = PlayerManager.Instance.Money.ToString("F2");
+        _text.text = PlayerManager.Instance.Money.ToReadableString();
     }
 }

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -6,6 +7,8 @@ using Utils;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     private AddFactoryBase _factory = new AddFactoryBase();
+
+    private double addLev = 1;
 
     private void Start()
     {
@@ -20,6 +23,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         double perSecAdd = _factory.GetAddBaseMoneyPerSec();
         double add = perSecAdd * (double)deltaSec;
         PlayerManager.Instance.AddMoney(add);
+
+        PlayerManager.Instance.AddMoney(Math.Pow(10, addLev));
+
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            addLev++;
+        }
+        else if(Input.GetKeyDown(KeyCode.S))
+        {
+            addLev--;
+        }
 
     }
 

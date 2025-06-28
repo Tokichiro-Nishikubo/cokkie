@@ -3,7 +3,7 @@ using Utils;
 
 public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
-    public double Money { get; private set; }
+    public double Money { get; private set; } = 0;
 
 
     public void UseMoney(double money)
