@@ -998,11 +998,12 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 2092940274}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 23
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
@@ -1258,7 +1259,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 22.524, y: 22.524, z: 22.524}
+  m_LocalScale: {x: 628.3746, y: 628.3746, z: 628.3746}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1683,6 +1684,14 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+    - target: {fileID: 1053784219312920102, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+      propertyPath: buttonType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254389307242450214, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -217
+      objectReference: {fileID: 0}
     - target: {fileID: 1437764515690771003, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
       propertyPath: m_sharedMaterial
       value: 
@@ -1699,6 +1708,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+    - target: {fileID: 2536119510150383236, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -667
+      objectReference: {fileID: 0}
     - target: {fileID: 5696927756630975843, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1787,19 +1800,37 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+    - target: {fileID: 6696960396171225646, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 682.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320431932835417265, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 233
+      objectReference: {fileID: 0}
     - target: {fileID: 8166830798121759368, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+    - target: {fileID: 8437497586357841778, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+      propertyPath: buttonType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8849160904504889568, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8956915276362853845, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+--- !u!20 &2092940274 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7811855971306443755, guid: 20693e967fa791c4093cc08dc7660e30, type: 3}
+  m_PrefabInstance: {fileID: 2092940273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

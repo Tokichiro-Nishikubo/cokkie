@@ -19,6 +19,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private string _facPointLevKey = "FPoint";
     private string _facAmountKey = "FAmount";
     private string _facSpeedKey = "FSpeed";
+    private string _facAll = "FALL";
 
     private void Start()
     {
@@ -57,6 +58,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         PlayerPrefs.SetInt(_facPointLevKey, _factory.PointNum);
         PlayerPrefs.SetInt(_facAmountKey, _factory.AmountNum);
         PlayerPrefs.SetInt(_facSpeedKey, _factory.SecSpeedNum);
+        PlayerPrefs.SetInt(_facAll, _factory.TotalAmplificationNum);
         PlayerPrefs.Save();
     }
 
@@ -72,6 +74,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _factory.ForceSetPointNum(PlayerPrefs.GetInt(_facPointLevKey));
         _factory.ForceSetAmountNum(PlayerPrefs.GetInt(_facAmountKey));
         _factory.ForceSetSpeedNum(PlayerPrefs.GetInt(_facSpeedKey));
+        _factory.ForceSetTotalAmplificationNum(PlayerPrefs.GetInt(_facAll));
 
         return true;
     }

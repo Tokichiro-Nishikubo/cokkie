@@ -92,22 +92,22 @@ public class AddFactoryBase
 
     public bool IsPointBuy()
     {
-        return PlayerManager.Instance.Money < GetPointCost();
+        return PlayerManager.Instance.Money > GetPointCost();
     }
 
     public bool IsAmountBuy()
     {
-        return PlayerManager.Instance.Money < GetAmountCost();
+        return PlayerManager.Instance.Money > GetAmountCost();
     }
 
     public bool IsSpeedBuy()
     {
-        return PlayerManager.Instance.Money < GetSpeedCost();
+        return PlayerManager.Instance.Money > GetSpeedCost();
     }
 
     public bool IsTotalAmplificationBuy()
     {
-        return PlayerManager.Instance.Money < GetTotalAmplificationCost();
+        return PlayerManager.Instance.Money > GetTotalAmplificationCost();
     }
     public void ForceSetPointNum(int num)
     {
