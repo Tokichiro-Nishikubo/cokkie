@@ -1,4 +1,5 @@
 using naichilab.Scripts.Extensions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
@@ -13,9 +14,9 @@ public class FactoryUi : MonoBehaviour
         Speed
     }
     public ButtonType buttonType;
-    public Text buttonName;
-    public Text buttonCost;
-    public Text buttonLevel;
+    public TextMeshProUGUI buttonName;
+    public TextMeshProUGUI buttonCost;
+    public TextMeshProUGUI buttonLevel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -107,21 +108,23 @@ public class FactoryUi : MonoBehaviour
         switch (buttonType)
         {
             case ButtonType.Point:
-                if (factoryBase.PointBuy())
+                if (factoryBase.IsPointBuy())
                 {
-                    buttonLevel.text = factoryBase.PointNum.ToString();
-                }
+                    factoryBase.PointBuy();
+                }   
                 break;
             case ButtonType.Amount:
-                if (factoryBase.AmountBuy())
+                if(factoryBase.IsAmountBuy())
                 {
-                    buttonLevel.text = factoryBase.AmountNum.ToString();
+                    factoryBase.AmountBuy();
                 }
                 break;
             case ButtonType.Speed:
-                if (factoryBase.SpeedBuy())
+                int level = factoryBase.SecSpeedNum;
+                if (level >= 9) break;
+                if (factoryBase.IsSpeedBuy())
                 {
-                    buttonLevel.text = factoryBase.SecSpeedNum.ToString();
+                    factoryBase.SpeedBuy();
                 }
                 break;
         }
