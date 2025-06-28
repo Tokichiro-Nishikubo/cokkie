@@ -101,10 +101,14 @@ public class FactoryUi : MonoBehaviour
                     break;
             }
         }
+        var mousePos = Input.mousePosition;
+        Debug.Log($"OnClickButton: {mousePos}");
     }
 
     public void OnClickButton()
     {
+        var mousePos = Input.mousePosition;
+        Debug.Log($"OnClickButton: {mousePos}");
         switch (buttonType)
         {
             case ButtonType.Point:

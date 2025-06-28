@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: "\u30B3\u30B9\u30C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_text: "\u540D\u524D\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_text: "\u30B3\u30B9\u30C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_text: "\u540D\u524D\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -916,7 +916,7 @@ MonoBehaviour:
   m_text: "\u30EC\u30D9\u30EB"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_text: "\u30B3\u30B9\u30C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_text: "\u30EC\u30D9\u30EB"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_text: "\u30EC\u30D9\u30EB"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1716,7 +1716,7 @@ MonoBehaviour:
   m_text: "\u540D\u524D\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
-  m_sharedMaterial: {fileID: -3127038131824419073, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
+  m_sharedMaterial: {fileID: 2354857475285592169, guid: 82b94408918c86c48a40904c0242be7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
