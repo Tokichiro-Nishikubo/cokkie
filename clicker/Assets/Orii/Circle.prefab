@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 9176525445668190813}
   - component: {fileID: 3969912721808309688}
   - component: {fileID: 8633479418166164284}
-  m_Layer: 0
+  - component: {fileID: 391074730793207384}
+  m_Layer: 4
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,5 +104,34 @@ MonoBehaviour:
   speed: 2
   width: 3
   height: 1
-  interval: 0.05
-  afterImage: {fileID: 4552697372426006434, guid: f3facec8c1f817d4780a53c6b8848cfc, type: 3}
+--- !u!114 &391074730793207384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8473782097849262405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6235e4ae44e8e4d089ca09290089ea0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetSpriteRenderer: {fileID: 3969912721808309688}
+  _afterImageNum: 7
+  _ignoreTimeScale: 0
+  _colorList:
+  - {r: 0.87169814, g: 0.87169814, b: 0.87169814, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  _isSameColor: 1
+  _materialType: 0
+  _materialList: []
+  _interval: 0.05
+  _distanceRange: 0.3

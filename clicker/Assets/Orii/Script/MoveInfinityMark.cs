@@ -7,8 +7,6 @@ public class MoveInfinityMark : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float width = 3.0f;
     [SerializeField] private float height = 2.0f;
-    [SerializeField] float interval = 0.1f;
-    [SerializeField] GameObject afterImage;
 
     //スピードのプロパティ
     public float Speed
@@ -22,8 +20,6 @@ public class MoveInfinityMark : MonoBehaviour
 
     //無限を描くsinの値
     float sin;
-    //残像の出現間隔
-    float time;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,13 +37,5 @@ public class MoveInfinityMark : MonoBehaviour
         float y = Mathf.Sin(sin * 2) * height;
 
         transform.localPosition = new Vector3(x + pos.x, y + pos.y, 0);
-
-        //残像の生成
-        time += Time.deltaTime;
-
-        if (time > interval)
-        {
-            Instantiate(afterImage,transform.position,Quaternion.identity);
-        }
     }
 }
