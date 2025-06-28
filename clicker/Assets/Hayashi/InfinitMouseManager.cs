@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Utils;
 using static UnityEditor.PlayerSettings;
 using static UnityEngine.Rendering.HableCurve;
 
 [RequireComponent(typeof(LineRenderer))]
 
 // カーソルの場所取得は60PFS固定で行う
-public class InfinitMouseRotate : MonoBehaviour
+public class InfinitMouseManager : SingletonMonoBehaviour<InfinitMouseManager>
 {
     struct LineSeg
     {
@@ -52,8 +53,9 @@ public class InfinitMouseRotate : MonoBehaviour
     // 外部に情報を伝える用
     public bool _isInfinityTime { get; private set;} = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _lineRenderer = GetComponent<LineRenderer>();
     }
 
@@ -229,7 +231,7 @@ public class InfinitMouseRotate : MonoBehaviour
         //Debug.Log("右下" + _Points.xMaxYMax);
 
         //Debug.Log("交点：" + _Points.crossPoint);
-        // Debug.Log("インフィニティ！");
+        //Debug.Log("インフィニティ！");
         ResetInfinitData();
         return true;
     }
