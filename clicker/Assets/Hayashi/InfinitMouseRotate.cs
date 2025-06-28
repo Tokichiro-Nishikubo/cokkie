@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.Rendering.HableCurve;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -24,9 +25,9 @@ public class InfinitMouseRotate : MonoBehaviour
     // 毎フレームごとに比較して４点の数値を格納
     struct StoragePoints
     {
-        public Vector2 crossLine;   // 交差場所
+        public Vector2 crossPoint;   // 交差場所
         public Vector2 xMinYMin;
-        public Vector2 xMinMax;
+        public Vector2 xMinYMax;
         public Vector2 xMaxYMin;
         public Vector2 xMaxYMax;
     }
@@ -34,7 +35,7 @@ public class InfinitMouseRotate : MonoBehaviour
     private List<LineSeg> _straightLineHistory = new List<LineSeg>();
     private StoragePoints _Points = new StoragePoints();      // 必要なポイントの情報を格納
     private int _curHistoryCnt = 0;                 // マウスの保存フレーム / 前のフレームを取得しやすくする為に、TimeではなくCountで行う
-    private int _straightLineStreakCnt = 0;         // 直線が連続した場合のカウント
+    private int _straightLineStreakCnt = 0;         // 直線が連続した場合のカウント / 最適化用
     private Vector2 _curCursorPos = new Vector2();  // 現在のカーソル座標 / 直線判定用
     private Vector2 _prevCursorPos = new Vector2(); // 前フレームのカーソル座標 / 直線判定用
 
@@ -53,10 +54,7 @@ public class InfinitMouseRotate : MonoBehaviour
         // Fixedだとクリックを離した判定が取れない可能性があるのでここで
         if (Input.GetMouseButtonUp(0))
         {
-            _curHistoryCnt = 0;
-            _straightLineHistory.Clear();
-            _prevCursorPos = Vector2.zero;
-            _curCursorPos = Vector2.zero;
+            ResetInfinitData();
         }
     }
 
@@ -65,6 +63,8 @@ public class InfinitMouseRotate : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             _curCursorPos = Input.mousePosition;
+            // マウスカーソル取得の後に呼び出し
+            StoragekMinMaxPoint();
 
             if (_straightLineHistory.Count > _deleteHistoryFrame)
             {
@@ -75,27 +75,20 @@ public class InfinitMouseRotate : MonoBehaviour
             {
                 _straightLineHistory.Add(new LineSeg(_curHistoryCnt, _prevCursorPos, _curCursorPos));
             }
-
-            CheckAllIntersections();
-
-            // 点の確認用ーーーーーーーーーーー
-            //Debug.Log(_cursorPosHistory.Count);
-            //Debug.Log(string.Join(", ", _cursorPosHistory));
-            // 線の確認用ーーーーーーーーーーー
-            Color lineColor = Color.red;
-            // 直線をすべて描画
-            foreach (LineSeg seg in _straightLineHistory)
+            else// 初回座標登録
             {
-                Vector3 p0 = new Vector3(seg.start.x, seg.start.y, 0f);
-                Vector3 p1 = new Vector3(seg.end.x, seg.end.y, 0f);
-
-                // 第３引数が0なら線は無限に残る
-                Debug.DrawLine(p0, p1, lineColor, 0f, false);
+                _Points.xMinYMin = _curCursorPos;
+                _Points.xMinYMax = _curCursorPos;
+                _Points.xMaxYMin = _curCursorPos;
+                _Points.xMaxYMax = _curCursorPos;
             }
 
-            // 最後に
+            // _straightLineHistory追加後に初期化
             _curHistoryCnt++;
             _prevCursorPos = _curCursorPos;
+
+            // _curHistoryCnt++の後に配置
+            CheckAllIntersections();
         }
     }
 
@@ -106,8 +99,9 @@ public class InfinitMouseRotate : MonoBehaviour
         Vector2 r = p2 - p1;
         Vector2 s = q2 - q1;
 
-        float rxs = r.x * s.y - r.y * s.x;       // r × s
-        if (Mathf.Approximately(rxs, 0f)) return false;   // 平行 or 同一直線 → 交点なし
+        float rxs = r.x * s.y - r.y * s.x;
+        // 同じような方向の場合は、交差していない判定を行う
+        if (Mathf.Approximately(rxs, 0f)) return false;  
 
         Vector2 qp = q1 - p1;
         float t = (qp.x * s.y - qp.y * s.x) / rxs;
@@ -118,13 +112,18 @@ public class InfinitMouseRotate : MonoBehaviour
         if (t <= Eps || t >= 1f - Eps) return false;
         if (u <= Eps || u >= 1f - Eps) return false;
 
-        _Points.crossLine = p1 + t * r;   // 交点
+        _Points.crossPoint = p1 + t * r;   // 交点
+        // Debug.Log("交差");
+
         return true;
     }
-
+    // 全ての線を捜査してヒット判定を取得する
     private bool CheckAllIntersections()
     {
         int maxCount = _straightLineHistory.Count;
+
+        // ∞が完成したタイミングで、要素をすべて削除した時のエラー対処用
+        if(maxCount <= 2) return false;
 
         for (int firstLine = 0; firstLine < maxCount - 1; firstLine++)
         {
@@ -136,13 +135,92 @@ public class InfinitMouseRotate : MonoBehaviour
                 if (IsLineSegmentIntersect(l1.start, l1.end, l2.start, l2.end))
                 {
                     // ヒット時の処理
-                    Debug.Log($"Hit! #{l1.storageCount} と #{l2.storageCount}");
-                    Debug.Log("交点：" + _Points.crossLine);
-                    return true;
+                    //Debug.Log($"Hit! #{l1.storageCount} と #{l2.storageCount}");
+                    if(CheckInfinit())
+                    {
+                        return true;
+                    }
                 }
             }
         }
 
         return false;
+    }
+    // ポイントの最小最大を格納する
+    private void StoragekMinMaxPoint()
+    {
+        // 左下
+        if(_curCursorPos.x <= _Points.xMinYMin.x && _curCursorPos.y <= _Points.xMinYMin.y)
+        {
+            _Points.xMinYMin = _curCursorPos;
+            // Debug.Log("左下格納");
+        }
+        // 左上
+        if(_curCursorPos.x <= _Points.xMinYMax.x && _curCursorPos.y >= _Points.xMinYMax.y)
+        {
+            _Points.xMinYMax = _curCursorPos;
+            // Debug.Log("左上格納");
+        }
+        // 右下
+        if (_curCursorPos.x >= _Points.xMaxYMin.x && _curCursorPos.y <= _Points.xMaxYMin.y)
+        {
+            _Points.xMaxYMin = _curCursorPos;
+            // Debug.Log("右下格納");
+        }
+        // 右上
+        if (_curCursorPos.x >= _Points.xMaxYMax.x && _curCursorPos.y >= _Points.xMaxYMax.y)
+        {
+            _Points.xMaxYMax = _curCursorPos;
+            // Debug.Log("右上格納");
+        }
+    }
+
+    // 無限が完成しているかどうか / StragePointに４点が格納されていて、crossPointとの判定をクリアするとtrue
+    private bool CheckInfinit()
+    {
+        Vector2 crossPoint = _Points.crossPoint;
+        //Debug.Log(crossPoint);
+        // 左下
+        if (crossPoint.x <= _Points.xMinYMin.x || crossPoint.y <= _Points.xMinYMin.y)
+        {
+            //Debug.Log("左下" + _Points.xMinYMin);
+            return false;
+        }
+        // 左上
+        if (crossPoint.x <= _Points.xMinYMax.x || crossPoint.y >= _Points.xMinYMax.y)
+        {
+            //Debug.Log("左上" + _Points.xMinYMax);
+            return false;
+        }
+        // 右下
+        if (crossPoint.x >= _Points.xMaxYMin.x || crossPoint.y <= _Points.xMaxYMin.y)
+        {
+            //Debug.Log("右上" + _Points.xMaxYMin);
+            return false;
+        }
+        // 右上
+        if (crossPoint.x >= _Points.xMaxYMax.x || crossPoint.y >= _Points.xMaxYMax.y)
+        {
+            //Debug.Log("右下" + _Points.xMaxYMax);
+            return false;
+        }
+        //Debug.Log("左下" + _Points.xMinYMin);
+        //Debug.Log("左上" + _Points.xMinYMax);
+        //Debug.Log("右上" + _Points.xMaxYMin);
+        //Debug.Log("右下" + _Points.xMaxYMax);
+
+        //Debug.Log("交点：" + _Points.crossPoint);
+        // Debug.Log("インフィニティ！");
+        ResetInfinitData();
+        return true;
+    }
+
+    private void ResetInfinitData()
+    {
+        _curHistoryCnt = 0;
+        _straightLineHistory.Clear();
+        _prevCursorPos = Vector2.zero;
+        _curCursorPos = Vector2.zero;
+        _Points = default;
     }
 }
