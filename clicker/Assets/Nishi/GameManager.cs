@@ -9,10 +9,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private AddFactoryBase _factory = new AddFactoryBase();
 
     [SerializeField] private GameObject _text;
-    [SerializeField] private GameObject _nextLevelText;
     [SerializeField] private GameObject _store;
 
-    [SerializeField] private GameObject _reachInfText;
+    [SerializeField] private GameObject _reachText;
 
     private double addLev = 1;
 
@@ -31,7 +30,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         float deltaSec = Time.deltaTime;
 
         double scaler = 1;
-        if (InfinitMouseManager.Instance._isInfinityTime) scaler = 5;
+        if (InfinitMouseManager.Instance._isInfinityTime) scaler = _factory.TotalAmplificationNum + 2;
 
         // ‚¨‹à’Ç‰Á
         double perSecAdd = _factory.GetAddBaseMoneyPerSec() * scaler;
@@ -48,9 +47,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void ReachInf()
     {
         _text.SetActive(false);
-        _nextLevelText.SetActive(false);
         _store.SetActive(false);
-        _reachInfText.SetActive(true);
+        _reachText.SetActive(true);
     }
 
     private void Save()

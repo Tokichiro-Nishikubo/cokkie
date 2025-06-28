@@ -18,9 +18,9 @@ public class AddFactoryBase
     private double _baseAdd = 1;
 
     // ”{—¦
-    private double _mulPoint= 100;
-    private double _mulAmount = 10;
-    private double _mulSecSpeed = 5;
+    private double _mulPoint= 20;
+    private double _mulAmount = 4;
+    private double _mulSecSpeed = 2;
     private double _mulTotalAmplification = 1.5;
 
     // Šî‘b’l
@@ -78,7 +78,7 @@ public class AddFactoryBase
         if (PlayerManager.Instance.Money < cost) return false;
 
         SecSpeedNum++;
-        SecSpeed = 1 - SecSpeedNum;
+        SecSpeed = 1 - (0.1 * SecSpeedNum);
         return true;
     }
     public bool TotalAmplificationBuy()
@@ -122,7 +122,7 @@ public class AddFactoryBase
     public void ForceSetSpeedNum(int num)
     {
         SecSpeedNum = num;
-        SecSpeed = 1 - SecSpeedNum;
+        SecSpeed = 1 - (0.1 * SecSpeedNum);
     }
     public void ForceSetTotalAmplificationNum(int num)
     {
