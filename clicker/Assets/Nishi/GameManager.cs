@@ -30,21 +30,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         float deltaSec = Time.deltaTime;
 
+        double scaler = 1;
+        if (InfinitMouseManager.Instance._isInfinityTime) scaler = 5;
+
         // ‚¨‹à’Ç‰Á
-        double perSecAdd = _factory.GetAddBaseMoneyPerSec();
+        double perSecAdd = _factory.GetAddBaseMoneyPerSec() * scaler;
         double add = perSecAdd * (double)deltaSec;
         PlayerManager.Instance.AddMoney(add);
 
-        PlayerManager.Instance.AddMoney(Math.Pow(10, addLev));
-
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            addLev++;
-        }
-        else if(Input.GetKeyDown(KeyCode.S))
-        {
-            addLev--;
-        }
+        Debug.Log("add: " + perSecAdd);
 
         Save();
     }

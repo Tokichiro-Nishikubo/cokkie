@@ -1,10 +1,11 @@
 using naichilab.Scripts.Extensions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NextLevelContainer : MonoBehaviour
 {
-    [SerializeField] private Text _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     // Update is called once per frame
     void Update()
