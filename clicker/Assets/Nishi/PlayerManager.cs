@@ -12,15 +12,9 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         if (Money <= 0) Money = 0; // ‚È‚¢‚Æ‚ÍŽv‚¤‚ªˆê‰ž
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void AddMoney(double add)
     {
-        
+        Money += add;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -6,7 +6,14 @@ public class AddFactoryBase
 
     public int Level { get; protected set; }
 
-    protected double _addCost = 0;
+    protected double _baseCost = 0;
+
+    protected double _baseAddMoneyPerSec = 0;
+
+    public virtual double GetAddBaseMoneyPerSec()
+    {
+        return 1;
+    }
 
     public virtual double GetBuyCostGroup(int buyNum)
     {
