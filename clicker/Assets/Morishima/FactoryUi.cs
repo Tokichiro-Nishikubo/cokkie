@@ -1,3 +1,4 @@
+using naichilab.Scripts.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
@@ -39,13 +40,13 @@ public class FactoryUi : MonoBehaviour
             switch (buttonType)
             {
                 case ButtonType.Point:
-                    buttonCost.text = factoryBase.GetPointCost().ToString("F2");
+                    buttonCost.text = factoryBase.GetPointCost().ToReadableString();
                     break;
                 case ButtonType.Amount:
-                    buttonCost.text = factoryBase.GetAmountCost().ToString("F2");
+                    buttonCost.text = factoryBase.GetAmountCost().ToReadableString();
                     break;
                 case ButtonType.Speed:
-                    buttonCost.text = factoryBase.GetSpeedCost().ToString("F2");
+                    buttonCost.text = factoryBase.GetSpeedCost().ToReadableString();
                     break;
             }
         }
@@ -74,13 +75,13 @@ public class FactoryUi : MonoBehaviour
             switch (buttonType)
             {
                 case ButtonType.Point:
-                    buttonCost.text = factoryBase.GetPointCost().ToString("F2");
+                    buttonCost.text = factoryBase.GetPointCost().ToReadableString();
                     break;
                 case ButtonType.Amount:
-                    buttonCost.text = factoryBase.GetAmountCost().ToString("F2");
+                    buttonCost.text = factoryBase.GetAmountCost().ToReadableString();
                     break;
                 case ButtonType.Speed:
-                    buttonCost.text = factoryBase.GetSpeedCost().ToString("F2");
+                    buttonCost.text = factoryBase.GetSpeedCost().ToReadableString();
                     break;
             }
         }
