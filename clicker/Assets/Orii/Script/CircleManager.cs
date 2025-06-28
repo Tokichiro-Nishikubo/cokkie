@@ -14,10 +14,14 @@ public class CircleManager : MonoBehaviour
     float speed = 1.0f;
     Color color = Color.white;
 
+    [SerializeField] GameObject colorManager;
+    ColorManager cm;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         AddCircle();
+        cm = colorManager.GetComponent<ColorManager>();
     }
 
     // Update is called once per frame
@@ -78,37 +82,37 @@ public class CircleManager : MonoBehaviour
         switch (num  % 11)
         {
             case 0:
-                color = colorList[0];
+                color = cm.LevelsColor[0];
                 break;
             case 1:
-                color = colorList[1];
+                color = cm.LevelsColor[1];
                 break;
             case 2:
-                color = colorList[2];
+                color = cm.LevelsColor[2];
                 break;
             case 3:
-                color = colorList[3];
+                color = cm.LevelsColor[3];
                 break;
             case 4:
-                color = colorList[4];
+                color = cm.LevelsColor[4];
                 break;
             case 5:
-                color = colorList[5];
+                color = cm.LevelsColor[5];
                 break;
             case 6:
-                color = colorList[6];
+                color = cm.LevelsColor[6];
                 break;
             case 7:
-                color = colorList[7];
+                color = cm.LevelsColor[7];
                 break;
             case 8:
-                color = colorList[8];
+                color = cm.LevelsColor[8];
                 break;
             case 9:
-                color = colorList[9];
+                color = cm.LevelsColor[9];
                 break;
             case 10:
-                color = colorList[10];
+                color = cm.LevelsColor[10];
                 break;
         }
 
