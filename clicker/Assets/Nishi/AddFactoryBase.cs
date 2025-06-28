@@ -9,7 +9,7 @@ public class AddFactoryBase
 
     public int AmountNum { get; protected set; } = 0;
 
-    public double SecSpeed { get; protected set; } = 0;
+    public double SecSpeed { get; protected set; } = 1;
     public int SecSpeedNum { get; protected set; } = 0;
 
     // ƒx[ƒX‰ÁZ—Ê
