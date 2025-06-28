@@ -4,29 +4,125 @@ using UnityEngine.UI;
 
 public class FactoryUi : MonoBehaviour
 {
+    AddFactoryBase factoryBase;
+    public enum ButtonType
+    {
+        Point,
+        Amount,
+        Speed
+    }
+    public ButtonType buttonType;
     public Text buttonName;
     public Text buttonCost;
     public Text buttonLevel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        factoryBase = GameManager.Instance.GetFactory();
+        if (buttonName != null)
+        {
+            switch (buttonType)
+            {
+                case ButtonType.Point:
+                    buttonName.text = "ポイント";
+                    break;
+                case ButtonType.Amount:
+                    buttonName.text = "量";
+                    break;
+                case ButtonType.Speed:
+                    buttonName.text = "速度";
+                    break;
+            }
+        }
+        if (buttonCost != null)
+        {
+            switch (buttonType)
+            {
+                case ButtonType.Point:
+                    buttonCost.text = factoryBase.GetPointCost().ToString("F2");
+                    break;
+                case ButtonType.Amount:
+                    buttonCost.text = factoryBase.GetAmountCost().ToString("F2");
+                    break;
+                case ButtonType.Speed:
+                    buttonCost.text = factoryBase.GetSpeedCost().ToString("F2");
+                    break;
+            }
+        }
+        if (buttonLevel != null)
+        {
+            switch (buttonType)
+            {
+                case ButtonType.Point:
+                    buttonLevel.text = factoryBase.PointNum.ToString();
+                    break;
+                case ButtonType.Amount:
+                    buttonLevel.text = factoryBase.AmountNum.ToString();
+                    break;
+                case ButtonType.Speed:
+                    buttonLevel.text = factoryBase.SecSpeedNum.ToString();
+                    break;
+            }
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (buttonName == null || buttonCost == null || buttonLevel == null) return;
+        if (buttonCost != null)
+        {
+            switch (buttonType)
+            {
+                case ButtonType.Point:
+                    buttonCost.text = factoryBase.GetPointCost().ToString("F2");
+                    break;
+                case ButtonType.Amount:
+                    buttonCost.text = factoryBase.GetAmountCost().ToString("F2");
+                    break;
+                case ButtonType.Speed:
+                    buttonCost.text = factoryBase.GetSpeedCost().ToString("F2");
+                    break;
+            }
+        }
+        if (buttonLevel != null)
+        {
+            switch (buttonType)
+            {
+                case ButtonType.Point:
+                    buttonLevel.text = factoryBase.PointNum.ToString();
+                    break;
+                case ButtonType.Amount:
+                    buttonLevel.text = factoryBase.AmountNum.ToString();
+                    break;
+                case ButtonType.Speed:
+                    buttonLevel.text = factoryBase.SecSpeedNum.ToString();
+                    break;
+            }
+        }
+    }
 
-        AddFactoryBase factory = GetComponent<AddFactoryBase>();
-        if (factory == null) return;
-
-        buttonName.text = factory.Name;
-        buttonCost.text = factory.GetBuyCost(1).ToString("F0");
-        buttonLevel.text = "Lv." + factory.Level.ToString();
-
-        // ボタンの有効/無効を設定
-        //GetComponent<Button>().interactable = factory.IsBuy(1);
-
+    public void OnClickButton()
+    {
+        switch (buttonType)
+        {
+            case ButtonType.Point:
+                if (factoryBase.PointBuy())
+                {
+                    buttonLevel.text = factoryBase.PointNum.ToString();
+                }
+                break;
+            case ButtonType.Amount:
+                if (factoryBase.AmountBuy())
+                {
+                    buttonLevel.text = factoryBase.AmountNum.ToString();
+                }
+                break;
+            case ButtonType.Speed:
+                if (factoryBase.SpeedBuy())
+                {
+                    buttonLevel.text = factoryBase.SecSpeedNum.ToString();
+                }
+                break;
+        }
     }
 }
