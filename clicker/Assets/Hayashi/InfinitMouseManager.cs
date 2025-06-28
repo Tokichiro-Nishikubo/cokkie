@@ -5,8 +5,6 @@ using Utils;
 using static UnityEditor.PlayerSettings;
 using static UnityEngine.Rendering.HableCurve;
 
-[RequireComponent(typeof(LineRenderer))]
-
 // カーソルの場所取得は60PFS固定で行う
 public class InfinitMouseManager : SingletonMonoBehaviour<InfinitMouseManager>
 {
@@ -39,12 +37,11 @@ public class InfinitMouseManager : SingletonMonoBehaviour<InfinitMouseManager>
     private int _straightLineStreakCnt = 0;         // 直線が連続した場合のカウント / 最適化用
     private Vector2 _curCursorPos = new Vector2();  // 現在のカーソル座標 / 直線判定用
     private Vector2 _prevCursorPos = new Vector2(); // 前フレームのカーソル座標 / 直線判定用
-    private float _curBonusTime = 0f;
+    private float _curBonusTime = 0f;               // ボーナス時間のカウント
 
+    [Header("インフィニティの必要情報")]
     [Tooltip("保存したカーソル座標情報の削除フレーム")]
     [SerializeField, Range(0, 600)] private int _deleteHistoryFrame = 300;
-    [Tooltip("描画用に線を可視化するRenderer")]
-    [SerializeField] private LineRenderer _lineRenderer;
     [Tooltip("ボーナス倍率の時間設定")]
     [SerializeField,Range(0.0f,10.0f)] public float _bonusTimeMax = 5f;
     [Tooltip("ボーナス倍率")]
@@ -52,12 +49,6 @@ public class InfinitMouseManager : SingletonMonoBehaviour<InfinitMouseManager>
 
     // 外部に情報を伝える用
     public bool _isInfinityTime { get; private set;} = false;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        _lineRenderer = GetComponent<LineRenderer>();
-    }
 
     private void Update()
     {
